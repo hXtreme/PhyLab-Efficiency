@@ -1,4 +1,5 @@
 load('data.mat')
+x = [1 2 3];
 
 zeros = [-2.047 -2.034, -2.073, -2. 071];
 I = [0.63, 0.69, 0.78, 0.87];
@@ -24,8 +25,9 @@ P_M(i) = myfunc(F6, zeros(i), L6, T6);
 
 %% Efficiency
 r = (P_M./P_E)*100;
+r = r(2:4);
 figure;
-plot(r);
+scatter(x, r);
 
 %% Compute
 function P = myfunc(f, zero, L, T)
@@ -44,7 +46,6 @@ function P = myfunc(f, zero, L, T)
     end
 %     figure; plot(t);
     w = 2*pi./t;
-    w = rmoutliers(w);
     F = (f - zero);
     P = mean(F)*mean(w)*R;
 end
